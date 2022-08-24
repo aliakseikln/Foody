@@ -1,6 +1,6 @@
 # Foody
 
-EasyFood is an app that makes making food easier and gives you full information about the selected meal including instructions of how to make that meal provided by a video.
+Foody is an app that makes making food easier and gives you full information about the selected meal including instructions of how to make that meal provided by a video.
 
 ## Preview: 
 <img src="https://user-images.githubusercontent.com/48939805/185737554-972e51f2-83dc-49a0-ad70-58f38c68a95e.gif" width=30% height=30%>
