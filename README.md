@@ -4,7 +4,8 @@ Foody is an app that makes making food easier and gives you full information abo
 
 ## Preview: 
 
-<img src="https://user-images.githubusercontent.com/48939805/186488377-d68fbfce-127c-4d22-90bf-53ad291a87fb.gif" width=99% height=99%>
+https://user-images.githubusercontent.com/48939805/186488950-b5711fce-b4ac-462c-8c31-38d8367fe9c5.mp4
+
 
 ## Case Study:
 * [Room](https://developer.android.com/jetpack/androidx/releases/room)
