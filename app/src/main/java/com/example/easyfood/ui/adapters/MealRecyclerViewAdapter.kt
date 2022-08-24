@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.easyfood.data.pojo.Meal
+import com.example.easyfood.data.models.Meal
+import com.example.easyfood.data.models.MealDetails
 import com.example.easyfood.databinding.MealCardBinding
 
-class MealRecyclerAdapter : RecyclerView.Adapter<MealRecyclerAdapter.MealViewHolder>() {
+
+class MealRecyclerViewAdapter : RecyclerView.Adapter<MealRecyclerViewAdapter.MealViewHolder>() {
 
     private var mealList: List<Meal> = ArrayList()
     private lateinit var setOnMealClickListener: SetOnMealClickListener
@@ -21,13 +23,12 @@ class MealRecyclerAdapter : RecyclerView.Adapter<MealRecyclerAdapter.MealViewHol
         this.setOnMealClickListener = setOnMealClickListener
     }
 
-    class MealViewHolder(val binding: MealCardBinding) : RecyclerView.ViewHolder(binding.root)
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
         return MealViewHolder(MealCardBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: MealViewHolder, position: Int) {
+
         holder.binding.apply {
             tvMealName.text = mealList[position].strMeal
             Glide.with(holder.itemView)
@@ -43,8 +44,12 @@ class MealRecyclerAdapter : RecyclerView.Adapter<MealRecyclerAdapter.MealViewHol
     override fun getItemCount(): Int {
         return mealList.size
     }
+
+    class MealViewHolder(val binding: MealCardBinding) : RecyclerView.ViewHolder(binding.root)
+
+    interface SetOnMealClickListener {
+        fun setOnClickListener(meal: Meal)
+    }
 }
 
-interface SetOnMealClickListener {
-    fun setOnClickListener(meal: Meal)
-}
+

@@ -1,6 +1,8 @@
 package com.example.easyfood.data.retrofit
 
-import com.example.easyfood.data.pojo.*
+import com.example.easyfood.data.models.response.CategoryResponse
+import com.example.easyfood.data.models.response.MealRandomResponse
+import com.example.easyfood.data.models.response.MealResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -11,14 +13,14 @@ interface FoodApi {
     fun getCategories(): Call<CategoryResponse>
 
     @GET("filter.php?")
-    fun getMealsByCategory(@Query("i") category:String):Call<MealsResponse>
+    fun getMealsByCategory(@Query("i") category: String): Call<MealResponse>
 
-    @GET ("random.php")
-    fun getRandomMeal():Call<RandomMealResponse>
+    @GET("random.php")
+    fun getRandomMeal(): Call<MealRandomResponse>
 
     @GET("lookup.php?")
-    fun getMealById(@Query("i") id:String):Call<RandomMealResponse>
+    fun getMealById(@Query("i") id: String): Call<MealRandomResponse>
 
     @GET("search.php?")
-    fun getMealByName(@Query("s") s:String):Call<RandomMealResponse>
+    fun searchMeals(@Query("s") s: String): Call<MealResponse>
 }

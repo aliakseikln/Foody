@@ -1,4 +1,4 @@
-package com.example.easyfood
+package com.example.easyfood.utils
 
 const val MEAL_ID = "com.example.easyfood.fragments.idMeal"
 const val MEAL_NAME = "com.example.easyfood.fragments.nameMeal"

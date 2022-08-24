@@ -1,4 +1,4 @@
-package com.example.easyfood.data.pojo.activites
+package com.example.easyfood.ui.activities
 
 //import com.example.easyfood.util.Constants.Companion.MEAL_ID
 //import com.example.easyfood.util.Constants.Companion.MEAL_STR
@@ -10,29 +10,29 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
-import com.example.easyfood.MEAL_ID
-import com.example.easyfood.MEAL_STR
-import com.example.easyfood.MEAL_THUMB
+import com.example.easyfood.utils.MEAL_ID
+import com.example.easyfood.utils.MEAL_STR
+import com.example.easyfood.utils.MEAL_THUMB
 import com.example.easyfood.R
-import com.example.easyfood.data.pojo.MealDB
-import com.example.easyfood.data.pojo.MealDetail
+import com.example.easyfood.data.models.MealDataBase
+import com.example.easyfood.data.models.MealDetails
 import com.example.easyfood.databinding.ActivityMealDetailesBinding
-import com.example.easyfood.viewmodels.DetailsViewModel
+import com.example.easyfood.viewmodels.DetailsActivityViewModel
 import com.google.android.material.snackbar.Snackbar
 
-class MealDetailsActivity : AppCompatActivity() {
+class DetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMealDetailesBinding
-    private lateinit var detailsViewModel: DetailsViewModel
+    private lateinit var detailsActivityViewModel: DetailsActivityViewModel
     private var mealId = ""
     private var mealStr = ""
     private var mealThumb = ""
     private var ytUrl = ""
-    private lateinit var dtMeal: MealDetail
+    private lateinit var dtMeal: MealDetails
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        detailsViewModel = ViewModelProviders.of(this)[DetailsViewModel::class.java]
+        detailsActivityViewModel = ViewModelProviders.of(this)[DetailsActivityViewModel::class.java]
         binding = ActivityMealDetailesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -42,9 +42,9 @@ class MealDetailsActivity : AppCompatActivity() {
         setUpViewWithMealInformation()
         setFloatingButtonStatues()
 
-        detailsViewModel.getMealById(mealId)
+        detailsActivityViewModel.getMealById(mealId)
 
-        detailsViewModel.observeMealDetail().observe(this) { t ->
+        detailsActivityViewModel.observeMealDetail().observe(this) { t ->
             setTextsInViews(t!![0])
             stopLoading()
         }
@@ -74,7 +74,7 @@ class MealDetailsActivity : AppCompatActivity() {
     }
 
     private fun deleteMeal() {
-        detailsViewModel.deleteMealById(mealId)
+        detailsActivityViewModel.deleteMealById(mealId)
     }
 
     private fun setFloatingButtonStatues() {
@@ -86,11 +86,11 @@ class MealDetailsActivity : AppCompatActivity() {
     }
 
     private fun isMealSavedInDatabase(): Boolean {
-        return detailsViewModel.isMealSavedInDatabase(mealId)
+        return detailsActivityViewModel.isMealSavedInDatabase(mealId)
     }
 
     private fun saveMeal() {
-        val meal = MealDB(dtMeal.idMeal.toInt(),
+        val meal = MealDataBase(dtMeal.idMeal.toInt(),
             dtMeal.strMeal,
             dtMeal.strArea,
             dtMeal.strCategory,
@@ -98,7 +98,7 @@ class MealDetailsActivity : AppCompatActivity() {
             dtMeal.strMealThumb,
             dtMeal.strYoutube)
 
-        detailsViewModel.insertMeal(meal)
+        detailsActivityViewModel.insertMeal(meal)
     }
 
     private fun showLoading() {
@@ -116,7 +116,7 @@ class MealDetailsActivity : AppCompatActivity() {
 
     }
 
-    private fun setTextsInViews(meal: MealDetail) {
+    private fun setTextsInViews(meal: MealDetails) {
         this.dtMeal = meal
         ytUrl = meal.strYoutube
         binding.apply {

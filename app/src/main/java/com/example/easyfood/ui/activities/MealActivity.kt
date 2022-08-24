@@ -1,4 +1,4 @@
-package com.example.easyfood.data.pojo.activites
+package com.example.easyfood.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,18 +9,24 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.easyfood.*
-import com.example.easyfood.data.pojo.Meal
+import com.example.easyfood.data.models.Meal
+import com.example.easyfood.data.models.MealDetails
 import com.example.easyfood.databinding.ActivityCategoriesBinding
-import com.example.easyfood.ui.adapters.MealRecyclerAdapter
-import com.example.easyfood.ui.adapters.SetOnMealClickListener
+import com.example.easyfood.ui.adapters.MealRecyclerViewAdapter
+import com.example.easyfood.ui.adapters.MealRecyclerViewAdapter.SetOnMealClickListener
+
+import com.example.easyfood.utils.CATEGORY_NAME
+import com.example.easyfood.utils.MEAL_ID
+import com.example.easyfood.utils.MEAL_STR
+import com.example.easyfood.utils.MEAL_THUMB
 import com.example.easyfood.viewmodels.MealActivityViewModel
 
 
 class MealActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCategoriesBinding
     private lateinit var mealActivityViewModel: MealActivityViewModel
-    private lateinit var myAdapter: MealRecyclerAdapter
-    private var categoryNme = ""
+    private lateinit var mealAdapter: MealRecyclerViewAdapter
+    private var categoryName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,25 +34,26 @@ class MealActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         mealActivityViewModel = ViewModelProviders.of(this)[MealActivityViewModel::class.java]
+
         startLoading()
         prepareRecyclerView()
         mealActivityViewModel.getMealsByCategory(getCategory())
+
         mealActivityViewModel.observeMeal().observe(this) { t ->
             if (t == null) {
                 hideLoading()
-                Toast.makeText(applicationContext, "No meals in this category", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(applicationContext, "No meals in this category", Toast.LENGTH_SHORT).show()
                 onBackPressed()
             } else {
-                myAdapter.setCategoryList(t)
-                binding.tvCategoryCount.text = categoryNme + " : " + t.size.toString()
+                mealAdapter.setCategoryList(t)
+                binding.tvCategoryCount.text = categoryName + " : " + t.size.toString()
                 hideLoading()
             }
         }
 
-        myAdapter.setOnMealClickListener(object : SetOnMealClickListener {
+        mealAdapter.setOnMealClickListener(object : SetOnMealClickListener {
             override fun setOnClickListener(meal: Meal) {
-                val intent = Intent(applicationContext, MealDetailsActivity::class.java)
+                val intent = Intent(applicationContext, DetailsActivity::class.java)
                 intent.putExtra(MEAL_ID, meal.idMeal)
                 intent.putExtra(MEAL_STR, meal.strMeal)
                 intent.putExtra(MEAL_THUMB, meal.strMealThumb)
@@ -65,21 +72,20 @@ class MealActivity : AppCompatActivity() {
     private fun startLoading() {
         binding.apply {
             loadingGifMeals.visibility = View.VISIBLE
-            mealRoot.setBackgroundColor(ContextCompat.getColor(applicationContext,
-                R.color.g_loading))
+            mealRoot.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.g_loading))
         }
     }
 
     private fun getCategory(): String {
         val x = intent.getStringExtra(CATEGORY_NAME)!!
-        categoryNme = x
+        categoryName = x
         return x
     }
 
     private fun prepareRecyclerView() {
-        myAdapter = MealRecyclerAdapter()
+        mealAdapter = MealRecyclerViewAdapter()
         binding.mealRecyclerview.apply {
-            adapter = myAdapter
+            adapter = mealAdapter
             layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
         }
     }

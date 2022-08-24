@@ -1,7 +1,7 @@
-package com.example.easyfood.data.pojo
+package com.example.easyfood.data.models
 
 
-data class MealDetail(
+data class MealDetails(
     val dateModified: Any,
     val idMeal: String,
     val strArea: String,
@@ -54,5 +54,5 @@ data class MealDetail(
     val strMeasure9: String,
     val strSource: String,
     val strTags: Any,
-    val strYoutube: String
+    val strYoutube: String,
 )

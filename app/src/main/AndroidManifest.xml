@@ -14,13 +14,13 @@
         android:theme="@style/Theme.EasyFood"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.example.easyfood.data.pojo.activites.MealActivity"
+            android:name="com.example.easyfood.ui.activities.MealActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.easyfood.data.pojo.activites.MealDetailsActivity"
+            android:name="com.example.easyfood.ui.activities.DetailsActivity"
             android:exported="false" />
         <activity
-            android:name="com.example.easyfood.data.pojo.activites.MainActivity"
+            android:name="com.example.easyfood.ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

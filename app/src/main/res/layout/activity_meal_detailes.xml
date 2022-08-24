@@ -5,9 +5,7 @@
     android:id="@+id/details_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".data.pojo.activites.MealDetailsActivity">
-
-
+    tools:context=".ui.activities.DetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"

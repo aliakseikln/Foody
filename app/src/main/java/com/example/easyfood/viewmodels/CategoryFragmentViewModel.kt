@@ -4,14 +4,14 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.easyfood.data.pojo.CategoryResponse
-import com.example.easyfood.data.pojo.Category
+import com.example.easyfood.data.models.response.CategoryResponse
+import com.example.easyfood.data.models.Category
 import com.example.easyfood.data.retrofit.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CategoryViewModel : ViewModel() {
+class CategoryFragmentViewModel : ViewModel() {
     private var categories: MutableLiveData<List<Category>> = MutableLiveData<List<Category>>()
 
     init {
@@ -33,5 +33,9 @@ class CategoryViewModel : ViewModel() {
 
     fun observeCategories():LiveData<List<Category>>{
         return categories
+    }
+
+    companion object {
+        const val TAG = "CategoryFragmentViewModel"
     }
 }

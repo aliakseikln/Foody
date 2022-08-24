@@ -1,26 +1,25 @@
 package com.example.easyfood.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
-import com.example.easyfood.data.pojo.MealDB
+import com.example.easyfood.data.models.MealDataBase
 import com.example.easyfood.databinding.FavMealCardBinding
 
-class FavoriteMealsRecyclerAdapter :
-    RecyclerView.Adapter<FavoriteMealsRecyclerAdapter.FavoriteViewHolder>() {
-    private var favoriteMeals: List<MealDB> = ArrayList()
+class FavoriteRecyclerViewAdapter :
+    RecyclerView.Adapter<FavoriteRecyclerViewAdapter.FavoriteViewHolder>() {
+    private var favoriteMeals: List<MealDataBase> = ArrayList()
     private lateinit var onFavoriteClickListener: OnFavoriteClickListener
     private lateinit var onFavoriteLongClickListener: OnFavoriteLongClickListener
 
-    fun setFavoriteMealsList(favoriteMeals: List<MealDB>) {
+    fun setFavoriteMealsList(favoriteMeals: List<MealDataBase>) {
         this.favoriteMeals = favoriteMeals
         notifyDataSetChanged()
     }
 
-    fun getMelaByPosition(position: Int): MealDB {
+    fun getMelaByPosition(position: Int): MealDataBase {
         return favoriteMeals[position]
     }
 
@@ -61,14 +60,13 @@ class FavoriteMealsRecyclerAdapter :
         return favoriteMeals.size
     }
 
-    class FavoriteViewHolder(val binding: FavMealCardBinding) :
-        RecyclerView.ViewHolder(binding.root)
-}
+    class FavoriteViewHolder(val binding: FavMealCardBinding) : RecyclerView.ViewHolder(binding.root)
 
-interface OnFavoriteClickListener {
-    fun onFavoriteClick(meal: MealDB)
-}
+    interface OnFavoriteClickListener {
+        fun onFavoriteClick(meal: MealDataBase)
+    }
 
-interface OnFavoriteLongClickListener {
-    fun onFavoriteLongCLick(meal: MealDB)
+    interface OnFavoriteLongClickListener {
+        fun onFavoriteLongCLick(meal: MealDataBase)
+    }
 }

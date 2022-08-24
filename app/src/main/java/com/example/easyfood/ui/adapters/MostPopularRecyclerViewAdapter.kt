@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.easyfood.data.pojo.Meal
+import com.example.easyfood.data.models.Meal
+import com.example.easyfood.data.models.MealDetails
 import com.example.easyfood.databinding.MostPopularCardBinding
 
-class MostPopularRecyclerAdapter :
-    RecyclerView.Adapter<MostPopularRecyclerAdapter.MostPopularMealViewHolder>() {
+class MostPopularRecyclerViewAdapter :
+    RecyclerView.Adapter<MostPopularRecyclerViewAdapter.MostPopularMealViewHolder>() {
     private var mealsList: List<Meal> = ArrayList()
     private lateinit var onItemClick: OnItemClick
     private lateinit var onLongItemClick: OnLongItemClick
@@ -51,12 +52,13 @@ class MostPopularRecyclerAdapter :
 
     class MostPopularMealViewHolder(val binding: MostPopularCardBinding) :
         RecyclerView.ViewHolder(binding.root)
+
+    interface OnItemClick {
+        fun onItemClick(meal: Meal)
+    }
+
+    interface OnLongItemClick {
+        fun onItemLongClick(meal: Meal)
+    }
 }
 
-interface OnItemClick {
-    fun onItemClick(meal: Meal)
-}
-
-interface OnLongItemClick {
-    fun onItemLongClick(meal: Meal)
-}
