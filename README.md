@@ -1,6 +1,5 @@
 # Foody
-
-Food Recipe application. Browse a list of dishes with detailed cooking instructions and videos. Also, you can add your favorites to the quick access menu! Based on Mealdb API.
+Foody is an app that makes making food easier and gives you full information about the selected meal including instructions of how to make that meal provided by a video.
 
 ## Preview: 
 
